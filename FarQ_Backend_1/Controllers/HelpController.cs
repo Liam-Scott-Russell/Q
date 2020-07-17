@@ -16,20 +16,36 @@ namespace FarQ_Backend_1.Controllers
         {
             _context = context;
         }
-
-
-        [HttpGet("{eventID}")]
-        public async Task<ActionResult<Event>> GetEvent(int eventID)
+        
+        [HttpGet("{interviewerID}, {eventID}, {choice}")]
+        public async Task<ActionResult<Event>> GetHelpAsInterviewer(int interviewerID, string choice)
         {
-            var events = from e in _context.Event select e;
-            var helpLink = events.First(e => e.EventID.Equals(eventID))?.HelpLink;
+            var interviewers = _context.Interviewer.ToArray();
+            var interviewer = interviewers.First(i => i.UserID.Equals(interviewerID));
 
-            if (helpLink == null)
+            if (choice == "come")
             {
-                return NotFound();
+                var booths = _context.Booth.ToArray();
+                var boothLink = booths.First(b => b.InterviewerID.Equals(interviewer.UserID));
+                // TODO: Notify the event organiser of this help request
+                return Ok();
             }
+            else if (choice == "go")
+            {
+                var events = _context.Event.ToArray();
+                var helpLink = events.First(e => e.EventID.Equals(interviewer.EventID))?.HelpLink;
 
-            return Ok(helpLink);
+                if (helpLink == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(helpLink);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }
