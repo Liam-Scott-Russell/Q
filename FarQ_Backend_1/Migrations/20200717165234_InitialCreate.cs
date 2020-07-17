@@ -12,7 +12,7 @@ namespace FarQ_Backend_1.Migrations
                 {
                     BoothID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Occupied = table.Column<bool>(nullable: false),
+                    IsAvailable = table.Column<bool>(nullable: false),
                     InterviewerID = table.Column<int>(nullable: false),
                     Payload = table.Column<string>(nullable: true),
                     CurrentUser = table.Column<int>(nullable: false),

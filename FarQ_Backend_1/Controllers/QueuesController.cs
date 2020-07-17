@@ -81,7 +81,7 @@ namespace FarQ_Backend_1.Controllers
         [HttpPost]
         public async Task<ActionResult<Queue>> PostQueue(Queue queue)
         {
-            queue.UserIDs = JsonConvert.SerializeObject(new List<int>());
+            queue.UserIDs = JsonConvert.SerializeObject(new Queue<int>());
             _context.Queue.Add(queue);
             await _context.SaveChangesAsync();
 
@@ -101,6 +101,30 @@ namespace FarQ_Backend_1.Controllers
             _context.Queue.Remove(queue);
             await _context.SaveChangesAsync();
 
+            return queue;
+        }
+
+        [HttpPost("addUser")]
+        public async Task<ActionResult<Queue>> AddUser(int queueID, int userID)
+        {
+            var queues = _context.Queue.ToList();
+            Queue queue = queues.First(queue => queue.QueueID.Equals(queueID));
+            var userIDs = JsonConvert.DeserializeObject<Queue<int>>(queue.UserIDs);
+            userIDs.Enqueue(userID);
+            queue.UserIDs = JsonConvert.SerializeObject(userIDs);
+            await _context.SaveChangesAsync();
+            return queue;
+        }
+
+        [HttpPost("popQueue")]
+        public async Task<ActionResult<Queue>> PopUser(int queueID)
+        {
+            var queues = _context.Queue.ToList();
+            Queue queue = queues.First(queue => queue.QueueID.Equals(queueID));
+            var userIDs = JsonConvert.DeserializeObject<Queue<int>>(queue.UserIDs);
+            userIDs.Dequeue();
+            queue.UserIDs = JsonConvert.SerializeObject(userIDs);
+            await _context.SaveChangesAsync();
             return queue;
         }
 

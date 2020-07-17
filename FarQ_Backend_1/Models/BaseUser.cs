@@ -11,5 +11,6 @@ namespace Q_Backend.Models
         public string Name { get; set; }
         public int? EventID { get; set; }
         public string Email { get; set; }
+        public string Role { get; set; }
     }
 }

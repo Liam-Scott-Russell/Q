@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FarQ_Backend_1.Migrations
 {
     [DbContext(typeof(FarQContext))]
-    [Migration("20200717155700_InitialCreate")]
+    [Migration("20200717165234_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,7 +36,7 @@ namespace FarQ_Backend_1.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("Occupied")
+                    b.Property<bool>("IsAvailable")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Payload")

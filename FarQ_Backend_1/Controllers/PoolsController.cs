@@ -81,7 +81,7 @@ namespace FarQ_Backend_1.Controllers
         [HttpPost]
         public async Task<ActionResult<Pool>> PostPool(Pool pool)
         {
-            pool.Booths = JsonConvert.SerializeObject(new List<int>());
+            pool.Booths = JsonConvert.SerializeObject(new Queue<int>());
             _context.Pool.Add(pool);
             await _context.SaveChangesAsync();
 
@@ -96,8 +96,8 @@ namespace FarQ_Backend_1.Controllers
         {
             var pools = _context.Pool.ToArray();
             var pool = pools.First(pool => pool.PoolID.Equals(PoolID));
-            List<int> boothIDs = JsonConvert.DeserializeObject<List<int>>(pool.Booths);
-            boothIDs.Add(BoothID);
+            Queue<int> boothIDs = JsonConvert.DeserializeObject<Queue<int>>(pool.Booths);
+            boothIDs.Enqueue(BoothID);
             pool.Booths = JsonConvert.SerializeObject(boothIDs);
             await _context.SaveChangesAsync();
 

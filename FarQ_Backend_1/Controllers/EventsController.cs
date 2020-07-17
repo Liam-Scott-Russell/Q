@@ -106,5 +106,21 @@ namespace FarQ_Backend_1.Controllers
         {
             return _context.Event.Any(e => e.EventID == id);
         }
+
+        private Event GetEventById(int id)
+        {
+            var events = _context.Event.ToArray();
+            return events.First(@event => @event.EventID == id);
+        }
+
+        [HttpPost("updateStatus")]
+        public async Task<ActionResult<Event>> PostBoothAvailability(int eventID, string eventStatus)
+        {
+            var @event = GetEventById(eventID);
+            @event.Status = eventStatus;
+            await _context.SaveChangesAsync();
+
+            return await GetEvent(@event.EventID);
+        }
     }
 }

@@ -34,7 +34,7 @@ namespace FarQ_Backend_1.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("Occupied")
+                    b.Property<bool>("IsAvailable")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Payload")

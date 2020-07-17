@@ -86,6 +86,19 @@ namespace FarQ_Backend_1.Controllers
             return CreatedAtAction("GetBooth", new { id = booth.BoothID }, booth);
         }
 
+        // POST: api/Booths
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPost("updateAvailability")]
+        public async Task<ActionResult<Booth>> PostBoothAvailability(int boothID, bool isAvailable)
+        {
+            var booth = GetBoothById(boothID);
+            booth.IsAvailable = isAvailable;
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
         // DELETE: api/Booths/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Booth>> DeleteBooth(int id)
@@ -105,6 +118,12 @@ namespace FarQ_Backend_1.Controllers
         private bool BoothExists(int id)
         {
             return _context.Booth.Any(e => e.BoothID == id);
+        }
+
+        private Booth GetBoothById(int id) 
+        {
+            var booths = _context.Booth.ToArray();
+            return booths.First(booth => booth.BoothID == id);
         }
     }
 }

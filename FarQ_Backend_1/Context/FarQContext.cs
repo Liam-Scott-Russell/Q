@@ -41,5 +41,8 @@ namespace FarQ_Backend_1.Context
             // contains the has the connection string as the value
             //optionsBuilder.UseSqlServer(configuration.GetConnectionString("FarQContext"));
         }
+
+        // configure the database to be used by this context
+        public DbSet<Q_Backend.Models.Notification> Notification { get; set; }
     }
 }
