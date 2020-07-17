@@ -9,6 +9,6 @@ namespace Q_Backend.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int QueueID { get; set; }
-        public List<int> UserIDs { get; set; }
+        public string UserIDs { get; set; }
     }
 }

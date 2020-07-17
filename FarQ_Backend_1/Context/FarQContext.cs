@@ -20,6 +20,13 @@ namespace FarQ_Backend_1.Context
         // Use DbSet<Student> to query or read and 
         // write information about A Student
         public DbSet<User> User { get; set; }
+        public DbSet<Event> Event { get; set; }
+        public DbSet<Booth> Booth { get; set; }
+        public DbSet<EventOrganiser> EventOrganiser { get; set; }
+        public DbSet<Interviewer> Interviewer { get; set; }
+        public DbSet<Pool> Pool { get; set; }
+        public DbSet<Queue> Queue { get; set; }
+
         public static System.Collections.Specialized.NameValueCollection AppSettings { get; }
 
         // configure the database to be used by this context

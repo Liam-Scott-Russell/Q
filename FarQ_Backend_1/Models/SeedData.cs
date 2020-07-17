@@ -22,24 +22,36 @@ namespace FarQ_Backend_1.Models
                     return;   // DB has been seeded
                 }
 
-                context.User.AddRange(
-                    new User
-                    {
-                        Name = "David",
-                        EventID = 0,
-                        Email = "test@test.com"
-                    }
-                );
-                //context.Event.AddRange(
-                //    new Event
+                //context.User.AddRange(
+                //    new User
                 //    {
-                //        Description = "test",
-                //        EmployerLink = "fdsjfldks",
+                //        Name = "David",
+                //        EventID = 0,
+                //        Email = "test@test.com"
+                //    }
+                //);
+                //context.Event.AddRange(
+                //new Event
+                //{
+                //    Description = "test",
+                //    EmployerLink = "fdsjfldks",
+                //    EventID = 1,
+                //    HelpLink = "s",
+                //    Name = "dsa",
+                //    Status = "dsad",
+                //    UserLink = "dsads"
+                //}
+                //);
+                //List<int> eventIDs = new List<int>();
+                //eventIDs.Add(5);
+                //context.EventOrganiser.AddRange(
+                //    new EventOrganiser { 
+                //        Email = "dsa",
                 //        EventID = 1,
-                //        HelpLink = "s",
-                //        Name = "dsa",
-                //        Status = "dsad",
-                //        UserLink = "dsads"
+                //        Name = "a",
+                //        EventIDs = "",
+                //        Password = "dsa",
+                //        UserName = "dsa"
                 //    }
                 //);
                 context.SaveChanges();
