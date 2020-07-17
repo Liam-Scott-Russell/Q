@@ -30,7 +30,7 @@ namespace FarQ_Backend_1.Controllers
 
         // GET: api/Pools/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Pool>> GetPool(string id)
+        public async Task<ActionResult<Pool>> GetPool(int id)
         {
             var pool = await _context.Pool.FindAsync(id);
 
@@ -46,9 +46,9 @@ namespace FarQ_Backend_1.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPool(string id, Pool pool)
+        public async Task<IActionResult> PutPool(int id, Pool pool)
         {
-            if (id != pool.Booths)
+            if (id != pool.BoothID)
             {
                 return BadRequest();
             }
@@ -83,12 +83,12 @@ namespace FarQ_Backend_1.Controllers
             _context.Pool.Add(pool);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPool", new { id = pool.Booths }, pool);
+            return CreatedAtAction("GetPool", new { id = pool.BoothID }, pool);
         }
 
         // DELETE: api/Pools/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Pool>> DeletePool(string id)
+        public async Task<ActionResult<Pool>> DeletePool(int id)
         {
             var pool = await _context.Pool.FindAsync(id);
             if (pool == null)
@@ -102,9 +102,9 @@ namespace FarQ_Backend_1.Controllers
             return pool;
         }
 
-        private bool PoolExists(string id)
+        private bool PoolExists(int id)
         {
-            return _context.Pool.Any(e => e.Booths == id);
+            return _context.Pool.Any(e => e.BoothID == id);
         }
     }
 }

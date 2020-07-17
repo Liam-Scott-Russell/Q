@@ -23,14 +23,14 @@ namespace FarQ_Backend_1.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetBaseUser()
+        public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
             return await _context.User.ToListAsync();
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(string id)
+        public async Task<ActionResult<User>> GetUser(int id)
         {
             var user = await _context.User.FindAsync(id);
 
@@ -46,9 +46,9 @@ namespace FarQ_Backend_1.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(string id, User user)
+        public async Task<IActionResult> PutUser(int id, User user)
         {
-            if (id != user.Name)
+            if (id != user.UserID)
             {
                 return BadRequest();
             }
@@ -83,12 +83,12 @@ namespace FarQ_Backend_1.Controllers
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.Name }, user);
+            return CreatedAtAction("GetUser", new { id = user.UserID }, user);
         }
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(string id)
+        public async Task<ActionResult<User>> DeleteUser(int id)
         {
             var user = await _context.User.FindAsync(id);
             if (user == null)
@@ -102,9 +102,9 @@ namespace FarQ_Backend_1.Controllers
             return user;
         }
 
-        private bool UserExists(string id)
+        private bool UserExists(int id)
         {
-            return _context.User.Any(e => e.Name == id);
+            return _context.User.Any(e => e.UserID == id);
         }
     }
 }

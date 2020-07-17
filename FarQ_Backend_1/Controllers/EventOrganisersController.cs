@@ -30,7 +30,7 @@ namespace FarQ_Backend_1.Controllers
 
         // GET: api/EventOrganisers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<EventOrganiser>> GetEventOrganiser(string id)
+        public async Task<ActionResult<EventOrganiser>> GetEventOrganiser(int id)
         {
             var eventOrganiser = await _context.EventOrganiser.FindAsync(id);
 
@@ -46,9 +46,9 @@ namespace FarQ_Backend_1.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEventOrganiser(string id, EventOrganiser eventOrganiser)
+        public async Task<IActionResult> PutEventOrganiser(int id, EventOrganiser eventOrganiser)
         {
-            if (id != eventOrganiser.Name)
+            if (id != eventOrganiser.UserID)
             {
                 return BadRequest();
             }
@@ -83,12 +83,12 @@ namespace FarQ_Backend_1.Controllers
             _context.EventOrganiser.Add(eventOrganiser);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEventOrganiser", new { id = eventOrganiser.Name }, eventOrganiser);
+            return CreatedAtAction("GetEventOrganiser", new { id = eventOrganiser.UserID }, eventOrganiser);
         }
 
         // DELETE: api/EventOrganisers/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<EventOrganiser>> DeleteEventOrganiser(string id)
+        public async Task<ActionResult<EventOrganiser>> DeleteEventOrganiser(int id)
         {
             var eventOrganiser = await _context.EventOrganiser.FindAsync(id);
             if (eventOrganiser == null)
@@ -102,9 +102,9 @@ namespace FarQ_Backend_1.Controllers
             return eventOrganiser;
         }
 
-        private bool EventOrganiserExists(string id)
+        private bool EventOrganiserExists(int id)
         {
-            return _context.EventOrganiser.Any(e => e.Name == id);
+            return _context.EventOrganiser.Any(e => e.UserID == id);
         }
     }
 }

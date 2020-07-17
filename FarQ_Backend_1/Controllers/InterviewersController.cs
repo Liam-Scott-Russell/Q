@@ -30,7 +30,7 @@ namespace FarQ_Backend_1.Controllers
 
         // GET: api/Interviewers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Interviewer>> GetInterviewer(string id)
+        public async Task<ActionResult<Interviewer>> GetInterviewer(int id)
         {
             var interviewer = await _context.Interviewer.FindAsync(id);
 
@@ -46,9 +46,9 @@ namespace FarQ_Backend_1.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutInterviewer(string id, Interviewer interviewer)
+        public async Task<IActionResult> PutInterviewer(int id, Interviewer interviewer)
         {
-            if (id != interviewer.Name)
+            if (id != interviewer.UserID)
             {
                 return BadRequest();
             }
@@ -83,12 +83,12 @@ namespace FarQ_Backend_1.Controllers
             _context.Interviewer.Add(interviewer);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetInterviewer", new { id = interviewer.Name }, interviewer);
+            return CreatedAtAction("GetInterviewer", new { id = interviewer.UserID }, interviewer);
         }
 
         // DELETE: api/Interviewers/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Interviewer>> DeleteInterviewer(string id)
+        public async Task<ActionResult<Interviewer>> DeleteInterviewer(int id)
         {
             var interviewer = await _context.Interviewer.FindAsync(id);
             if (interviewer == null)
@@ -102,9 +102,9 @@ namespace FarQ_Backend_1.Controllers
             return interviewer;
         }
 
-        private bool InterviewerExists(string id)
+        private bool InterviewerExists(int id)
         {
-            return _context.Interviewer.Any(e => e.Name == id);
+            return _context.Interviewer.Any(e => e.UserID == id);
         }
     }
 }

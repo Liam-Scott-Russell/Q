@@ -7,8 +7,9 @@ namespace Q_Backend.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int UserID { get; set; }
         public string Name { get; set; }
-        public int EventID { get; set; }
+        public int? EventID { get; set; }
         public string Email { get; set; }
     }
 }

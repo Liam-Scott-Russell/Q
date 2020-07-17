@@ -7,6 +7,24 @@ namespace FarQ_Backend_1.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Booth",
+                columns: table => new
+                {
+                    BoothID = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Occupied = table.Column<bool>(nullable: false),
+                    InterviewerID = table.Column<int>(nullable: false),
+                    Payload = table.Column<string>(nullable: true),
+                    CurrentUser = table.Column<int>(nullable: false),
+                    IsActive = table.Column<bool>(nullable: false),
+                    EventID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Booth", x => x.BoothID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Event",
                 columns: table => new
                 {
@@ -28,8 +46,10 @@ namespace FarQ_Backend_1.Migrations
                 name: "EventOrganiser",
                 columns: table => new
                 {
-                    Name = table.Column<string>(nullable: false),
-                    EventID = table.Column<int>(nullable: false),
+                    UserID = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
+                    EventID = table.Column<int>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     UserName = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
@@ -37,33 +57,37 @@ namespace FarQ_Backend_1.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventOrganiser", x => x.Name);
+                    table.PrimaryKey("PK_EventOrganiser", x => x.UserID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Interviewer",
                 columns: table => new
                 {
-                    Name = table.Column<string>(nullable: false),
-                    EventID = table.Column<int>(nullable: false),
+                    UserID = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
+                    EventID = table.Column<int>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     Desc = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Interviewer", x => x.Name);
+                    table.PrimaryKey("PK_Interviewer", x => x.UserID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Pool",
                 columns: table => new
                 {
-                    Booths = table.Column<string>(nullable: false),
+                    BoothID = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Booths = table.Column<string>(nullable: true),
                     QueueID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pool", x => x.Booths);
+                    table.PrimaryKey("PK_Pool", x => x.BoothID);
                 });
 
             migrationBuilder.CreateTable(
@@ -83,43 +107,16 @@ namespace FarQ_Backend_1.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    Name = table.Column<string>(nullable: false),
-                    EventID = table.Column<int>(nullable: false),
+                    UserID = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
+                    EventID = table.Column<int>(nullable: true),
                     Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Name);
+                    table.PrimaryKey("PK_User", x => x.UserID);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "Booth",
-                columns: table => new
-                {
-                    BoothID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Occupied = table.Column<bool>(nullable: false),
-                    InterviewerName = table.Column<string>(nullable: true),
-                    Payload = table.Column<string>(nullable: true),
-                    CurrentUser = table.Column<int>(nullable: false),
-                    IsActive = table.Column<bool>(nullable: false),
-                    EventID = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Booth", x => x.BoothID);
-                    table.ForeignKey(
-                        name: "FK_Booth_Interviewer_InterviewerName",
-                        column: x => x.InterviewerName,
-                        principalTable: "Interviewer",
-                        principalColumn: "Name",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Booth_InterviewerName",
-                table: "Booth",
-                column: "InterviewerName");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -134,6 +131,9 @@ namespace FarQ_Backend_1.Migrations
                 name: "EventOrganiser");
 
             migrationBuilder.DropTable(
+                name: "Interviewer");
+
+            migrationBuilder.DropTable(
                 name: "Pool");
 
             migrationBuilder.DropTable(
@@ -141,9 +141,6 @@ namespace FarQ_Backend_1.Migrations
 
             migrationBuilder.DropTable(
                 name: "User");
-
-            migrationBuilder.DropTable(
-                name: "Interviewer");
         }
     }
 }
