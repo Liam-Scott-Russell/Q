@@ -30,17 +30,18 @@ namespace FarQ_Backend_1.Controllers
         }
 
         // GET: api/Notifications/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Notification>> GetNotification(int id)
+        [HttpGet("getnotificationbyid")]
+        public List<Notification> GetNotification(int userID)
         {
-            var notification = await _context.Notification.FindAsync(id);
+            var allNotifications = _context.Notification.ToList();
+            var notifications = allNotifications.Where(x => x.RespondentID == userID && x.IsActioned == false).ToList();
 
-            if (notification == null)
+            if (notifications == null)
             {
-                return NotFound();
+                return new List<Notification>();
             }
 
-            return notification;
+            return notifications;
         }
 
         // PUT: api/Notifications/5
@@ -75,28 +76,45 @@ namespace FarQ_Backend_1.Controllers
             return NoContent();
         }
 
-        //// POST: api/Notifications
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for
-        //// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //[HttpPost]
-        //public async Task<ActionResult<Notification>> PostNotification(NotificationRequest notificationRequest)
-        //{
-        //    Notification noti = new Notification();
-        //    if (notificationRequest.RequestRole == "Event Organiser")
-        //    {
-        //        List<EventOrganiser> eventOrganisers = _context.EventOrganiser.ToList();
-        //        noti.IsActioned = false;
+        // POST: api/Notifications
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPost("postNotification")]
+        public async Task<ActionResult<Notification>> PostNotification(NotificationRequest notificationRequest)
+        {
+            
+            if (notificationRequest.RequestRole == "Event Organiser")
+            {
+                List<EventOrganiser> eventOrganisers = _context.EventOrganiser.ToList();
 
-        //        foreach (var eventOrganiser in eventOrganisers)
-        //        {
-        //            _context.Notification.Add(notification);
-        //        }
-        //    }
-        //    _context.Notification.Add(notification);
-        //    await _context.SaveChangesAsync();
+                foreach (var eventOrganiser in eventOrganisers)
+                {
+                    Notification noti = new Notification
+                    {
+                        IsActioned = false,
+                        Message = notificationRequest.Message,
+                        Payload = notificationRequest.Payload,
+                        RequesterID = notificationRequest.RequesterID,
+                        RespondentID = eventOrganiser.UserID
+                    };
 
-        //    return CreatedAtAction("GetNotification", new { id = notification.NotificationID }, notification);
-        //}
+                    _context.Notification.Add(noti);
+                    await _context.SaveChangesAsync();
+                }
+            }
+
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpPost("dismissNotification")]
+        public async Task<ActionResult<Notification>> DismissNotification(int notificationID)
+        {
+            var notification = GetNotificationById(notificationID);
+            notification.IsActioned = true;
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
 
         // DELETE: api/Notifications/5
         [HttpDelete("{id}")]
@@ -117,6 +135,12 @@ namespace FarQ_Backend_1.Controllers
         private bool NotificationExists(int id)
         {
             return _context.Notification.Any(e => e.NotificationID == id);
+        }
+
+        private Notification GetNotificationById(int id)
+        {
+            var notifications = _context.Notification.ToArray();
+            return notifications.First(x => x.NotificationID == id);
         }
     }
 }

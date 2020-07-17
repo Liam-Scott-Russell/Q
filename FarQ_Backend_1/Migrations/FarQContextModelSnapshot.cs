@@ -95,6 +95,9 @@ namespace FarQ_Backend_1.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Role")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("UserName")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
@@ -123,9 +126,38 @@ namespace FarQ_Backend_1.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Role")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("UserID");
 
                     b.ToTable("Interviewer");
+                });
+
+            modelBuilder.Entity("Q_Backend.Models.Notification", b =>
+                {
+                    b.Property<int>("NotificationID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsActioned")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Payload")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("RequesterID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RespondentID")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("NotificationID");
+
+                    b.ToTable("Notification");
                 });
 
             modelBuilder.Entity("Q_Backend.Models.Pool", b =>
@@ -172,6 +204,9 @@ namespace FarQ_Backend_1.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Role")
                         .HasColumnType("TEXT");
 
                     b.HasKey("UserID");

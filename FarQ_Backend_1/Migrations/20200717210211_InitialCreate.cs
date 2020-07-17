@@ -51,6 +51,7 @@ namespace FarQ_Backend_1.Migrations
                     Name = table.Column<string>(nullable: true),
                     EventID = table.Column<int>(nullable: true),
                     Email = table.Column<string>(nullable: true),
+                    Role = table.Column<string>(nullable: true),
                     UserName = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     EventIDs = table.Column<string>(nullable: true)
@@ -69,11 +70,29 @@ namespace FarQ_Backend_1.Migrations
                     Name = table.Column<string>(nullable: true),
                     EventID = table.Column<int>(nullable: true),
                     Email = table.Column<string>(nullable: true),
+                    Role = table.Column<string>(nullable: true),
                     Desc = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Interviewer", x => x.UserID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notification",
+                columns: table => new
+                {
+                    NotificationID = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RequesterID = table.Column<int>(nullable: false),
+                    RespondentID = table.Column<int>(nullable: false),
+                    Message = table.Column<string>(nullable: true),
+                    Payload = table.Column<string>(nullable: true),
+                    IsActioned = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notification", x => x.NotificationID);
                 });
 
             migrationBuilder.CreateTable(
@@ -111,7 +130,8 @@ namespace FarQ_Backend_1.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true),
                     EventID = table.Column<int>(nullable: true),
-                    Email = table.Column<string>(nullable: true)
+                    Email = table.Column<string>(nullable: true),
+                    Role = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -132,6 +152,9 @@ namespace FarQ_Backend_1.Migrations
 
             migrationBuilder.DropTable(
                 name: "Interviewer");
+
+            migrationBuilder.DropTable(
+                name: "Notification");
 
             migrationBuilder.DropTable(
                 name: "Pool");

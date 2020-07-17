@@ -9,8 +9,8 @@ namespace Q_Backend.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int NotificationID { get; set; }
-        public string Requester { get; set; }
-        public string Respondent { get; set; }
+        public int RequesterID { get; set; }
+        public int RespondentID { get; set; }
         public string Message { get; set; }
         public string? Payload { get; set; }
         public bool IsActioned { get; set; }
