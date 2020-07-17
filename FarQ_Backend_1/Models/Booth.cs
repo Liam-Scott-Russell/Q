@@ -1,4 +1,4 @@
-﻿namespace Q_Backend.DTOs
+﻿namespace Q_Backend.Models
 {
     public class Booth
     {
