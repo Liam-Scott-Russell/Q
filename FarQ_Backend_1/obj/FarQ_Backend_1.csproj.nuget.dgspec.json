@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\wsydg\\source\\repos\\FarQ_Backend_1\\FarQ_Backend_1\\FarQ_Backend_1.csproj": {}
+    "C:\\Users\\wsydg\\Desktop\\Code\\Devs\\Q-Backend\\FarQ_Backend_1\\FarQ_Backend_1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\wsydg\\source\\repos\\FarQ_Backend_1\\FarQ_Backend_1\\FarQ_Backend_1.csproj": {
+    "C:\\Users\\wsydg\\Desktop\\Code\\Devs\\Q-Backend\\FarQ_Backend_1\\FarQ_Backend_1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\wsydg\\source\\repos\\FarQ_Backend_1\\FarQ_Backend_1\\FarQ_Backend_1.csproj",
+        "projectUniqueName": "C:\\Users\\wsydg\\Desktop\\Code\\Devs\\Q-Backend\\FarQ_Backend_1\\FarQ_Backend_1.csproj",
         "projectName": "FarQ_Backend_1",
-        "projectPath": "C:\\Users\\wsydg\\source\\repos\\FarQ_Backend_1\\FarQ_Backend_1\\FarQ_Backend_1.csproj",
+        "projectPath": "C:\\Users\\wsydg\\Desktop\\Code\\Devs\\Q-Backend\\FarQ_Backend_1\\FarQ_Backend_1.csproj",
         "packagesPath": "C:\\Users\\wsydg\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\wsydg\\source\\repos\\FarQ_Backend_1\\FarQ_Backend_1\\obj\\",
+        "outputPath": "C:\\Users\\wsydg\\Desktop\\Code\\Devs\\Q-Backend\\FarQ_Backend_1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -58,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
