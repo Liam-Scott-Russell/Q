@@ -80,14 +80,14 @@ namespace FarQ_Backend_1.Migrations
                 name: "Pool",
                 columns: table => new
                 {
-                    BoothID = table.Column<int>(nullable: false)
+                    PoolID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Booths = table.Column<string>(nullable: true),
                     QueueID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pool", x => x.BoothID);
+                    table.PrimaryKey("PK_Pool", x => x.PoolID);
                 });
 
             migrationBuilder.CreateTable(

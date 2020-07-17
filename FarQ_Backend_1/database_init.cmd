@@ -17,6 +17,8 @@ REM Make booth
 curl -X POST "https://localhost:44373/api/Booths" -H "accept: text/plain" -H "Content-Type: application/json" -d "{\"occupied\":false,\"interviewerID\":0,\"payload\":\"https://tinyurl.com/yxaxeu7j\",\"currentUser\":0,\"isActive\":true,\"eventID\":0}"
 
 REM Add booth to pool
+
+
 REM API CALL
 
 REM Make users

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FarQ_Backend_1.Migrations
 {
     [DbContext(typeof(FarQContext))]
-    [Migration("20200717150058_InitialCreate")]
+    [Migration("20200717155700_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -132,7 +132,7 @@ namespace FarQ_Backend_1.Migrations
 
             modelBuilder.Entity("Q_Backend.Models.Pool", b =>
                 {
-                    b.Property<int>("BoothID")
+                    b.Property<int>("PoolID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -142,7 +142,7 @@ namespace FarQ_Backend_1.Migrations
                     b.Property<int>("QueueID")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("BoothID");
+                    b.HasKey("PoolID");
 
                     b.ToTable("Pool");
                 });

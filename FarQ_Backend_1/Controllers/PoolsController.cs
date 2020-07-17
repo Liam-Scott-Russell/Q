@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FarQ_Backend_1.Context;
 using Q_Backend.Models;
+using Newtonsoft.Json;
 
 namespace FarQ_Backend_1.Controllers
 {
@@ -48,7 +49,7 @@ namespace FarQ_Backend_1.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPool(int id, Pool pool)
         {
-            if (id != pool.BoothID)
+            if (id != pool.PoolID)
             {
                 return BadRequest();
             }
@@ -80,10 +81,27 @@ namespace FarQ_Backend_1.Controllers
         [HttpPost]
         public async Task<ActionResult<Pool>> PostPool(Pool pool)
         {
+            pool.Booths = JsonConvert.SerializeObject(new List<int>());
             _context.Pool.Add(pool);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPool", new { id = pool.BoothID }, pool);
+            return CreatedAtAction("GetPool", new { id = pool.PoolID }, pool);
+        }
+
+        // POST: api/Pools
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPost("/addBoothToPool")]
+        public async Task<ActionResult<Pool>> AddBoothToPool(int PoolID, int BoothID)
+        {
+            var pools = _context.Pool.ToArray();
+            var pool = pools.First(pool => pool.PoolID.Equals(PoolID));
+            List<int> boothIDs = JsonConvert.DeserializeObject<List<int>>(pool.Booths);
+            boothIDs.Add(BoothID);
+            pool.Booths = JsonConvert.SerializeObject(boothIDs);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetPool", new { id = pool.PoolID }, pool);
         }
 
         // DELETE: api/Pools/5
@@ -104,7 +122,7 @@ namespace FarQ_Backend_1.Controllers
 
         private bool PoolExists(int id)
         {
-            return _context.Pool.Any(e => e.BoothID == id);
+            return _context.Pool.Any(e => e.PoolID == id);
         }
     }
 }

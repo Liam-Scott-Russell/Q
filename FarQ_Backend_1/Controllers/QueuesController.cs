@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FarQ_Backend_1.Context;
 using Q_Backend.Models;
+using Newtonsoft.Json;
 
 namespace FarQ_Backend_1.Controllers
 {
@@ -80,6 +81,7 @@ namespace FarQ_Backend_1.Controllers
         [HttpPost]
         public async Task<ActionResult<Queue>> PostQueue(Queue queue)
         {
+            queue.UserIDs = JsonConvert.SerializeObject(new List<int>());
             _context.Queue.Add(queue);
             await _context.SaveChangesAsync();
 

@@ -8,7 +8,7 @@ namespace Q_Backend.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int BoothID { get; set; }
+        public int PoolID { get; set; }
         public string Booths { get; set; }
         public int QueueID { get; set; }
     }

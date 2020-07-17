@@ -130,7 +130,7 @@ namespace FarQ_Backend_1.Migrations
 
             modelBuilder.Entity("Q_Backend.Models.Pool", b =>
                 {
-                    b.Property<int>("BoothID")
+                    b.Property<int>("PoolID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -140,7 +140,7 @@ namespace FarQ_Backend_1.Migrations
                     b.Property<int>("QueueID")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("BoothID");
+                    b.HasKey("PoolID");
 
                     b.ToTable("Pool");
                 });
