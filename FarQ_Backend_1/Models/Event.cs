@@ -7,5 +7,7 @@
         public string UserLink { get; set; }
         public string Status { get; set; }
         public string HelpLink { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }
