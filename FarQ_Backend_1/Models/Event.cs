@@ -2,6 +2,8 @@
 {
     public class Event
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EventID { get; set; }
         public string EmployerLink { get; set; }
         public string UserLink { get; set; }
