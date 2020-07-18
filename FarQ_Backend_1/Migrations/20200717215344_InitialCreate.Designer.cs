@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FarQ_Backend_1.Migrations
 {
     [DbContext(typeof(FarQContext))]
-    [Migration("20200717210211_InitialCreate")]
+    [Migration("20200717215344_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,9 @@ namespace FarQ_Backend_1.Migrations
                     b.Property<int>("CurrentUser")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("EventID")
                         .HasColumnType("INTEGER");
 
@@ -38,6 +41,9 @@ namespace FarQ_Backend_1.Migrations
 
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Payload")
                         .HasColumnType("TEXT");
@@ -169,6 +175,15 @@ namespace FarQ_Backend_1.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Booths")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Platform")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("QueueID")

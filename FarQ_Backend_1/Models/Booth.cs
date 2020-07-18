@@ -8,6 +8,8 @@ namespace Q_Backend.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BoothID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public bool IsAvailable { get; set; }
         public int InterviewerID { get; set; }
         public string Payload { get; set; }

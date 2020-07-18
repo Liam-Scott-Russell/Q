@@ -12,6 +12,8 @@ namespace FarQ_Backend_1.Migrations
                 {
                     BoothID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
                     IsAvailable = table.Column<bool>(nullable: false),
                     InterviewerID = table.Column<int>(nullable: false),
                     Payload = table.Column<string>(nullable: true),
@@ -101,6 +103,9 @@ namespace FarQ_Backend_1.Migrations
                 {
                     PoolID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
+                    Platform = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
                     Booths = table.Column<string>(nullable: true),
                     QueueID = table.Column<int>(nullable: false)
                 },
